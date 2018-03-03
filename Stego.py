@@ -1,4 +1,4 @@
-# Himanshu Moliya
+# Himanshu Moliya,Rahul Rachh
 # hackthon : Aadhar card data minimization 
 
 import cv2
