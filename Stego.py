@@ -2,6 +2,32 @@
 # hackthon : Aadhar card data minimization 
 
 import cv2
+from __future__ import absolute_import, unicode_literals
+import random, sys
+from PIL import Image
+
+BIT = 8
+
+def pixel_normalization(r, g, b):
+    if is_pixel_modification(r, g, b):
+        seed = random.randint(1, 3)
+        if seed == 1:
+            r = _normalize(r)
+        if seed == 2:
+            g = _normalize(g)
+        if seed == 3:
+            b = _normalize(b)
+    return r, g, b
+
+def is_pixel_modification(r, g, b):
+    return r % BIT == g % BIT == b % BIT == 1
+
+def _normalize(i):
+    if i >= 128:
+        i -= 1
+    else:
+        i += 1
+    return i
 
 def bitgenerator(message):
     for k in (message):
