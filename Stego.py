@@ -29,6 +29,21 @@ def _normalize(i):
         i += 1
     return i
 
+def normalize(path, output):
+ 
+    img = Image.open(path)
+    img = img.convert('RGB')
+    size = img.size
+    new_img = Image.new('RGB', size)
+
+    for y in range(img.size[1]):
+        for x in range(img.size[0]):
+            r, g, b = img.getpixel((x, y))
+            _r, _g, _b = pixel_normalization(r, g, b)
+            new_img.putpixel((x, y), (_r, _g, _b))
+    new_img.save(output, "PNG", optimize=True)
+
+
 def bitgenerator(message):
     for k in (message):
         p = ord(k)
