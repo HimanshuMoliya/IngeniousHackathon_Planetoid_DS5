@@ -1,3 +1,6 @@
+# Himanshu Moliya
+# hackthon : Aadhar card data minimization 
+
 import cv2
 
 def bitgenerator(message):
@@ -7,10 +10,11 @@ def bitgenerator(message):
             yield (p & (1 << i)) >> i
 
 # design a generator for the hidden message
-hidden_message = bitgenerator(open("info.txt", "r").read() * 10) 
-
+filename = input("Enter name of your details file ? ")
+hidden_message = bitgenerator(open(filename, "r").read() * 10) 
+imagename = input("Enter name of image file ?(.bmp or .png) ")
 # Read original image
-img = cv2.imread('lena.png', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread(imagename, cv2.IMREAD_GRAYSCALE)
 
 for h in range(len(img)):
     for w in range(len(img[0])):
@@ -18,4 +22,5 @@ for h in range(len(img)):
         img[h][w] = (img[h][w] & ~1) | next(hidden_message)
 
 # Write out the image with hidden message
-cv2.imwrite("output.png", img)
+cv2.imwrite("out"+imagename, img)
+print("please find output file")
