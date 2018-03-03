@@ -1,4 +1,4 @@
-# Himanshu Moliya
+# Himanshu Moliya, Rahul Rachh
 # hackthon : Aadhar card data minimization
 # this file is use for restor data from image
 import cv2
