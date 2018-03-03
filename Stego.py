@@ -19,6 +19,9 @@ def pixel_normalization(r, g, b):
             b = _normalize(b)
     return r, g, b
 
+def pixel_modification(r, g, b):
+    return map(_modify, [r, g, b])
+
 def is_pixel_modification(r, g, b):
     return r % BIT == g % BIT == b % BIT == 1
 
@@ -28,6 +31,7 @@ def _normalize(i):
     else:
         i += 1
     return i
+
 
 def normalize(path, output):
  
@@ -43,7 +47,27 @@ def normalize(path, output):
             new_img.putpixel((x, y), (_r, _g, _b))
     new_img.save(output, "PNG", optimize=True)
 
+def _modify(i):
+    if i >= 128:
+        for x in xrange(BIT + 1):
+            if i % BIT == 1:
+                return i
+            i -= 1
+    else:
+        for x in xrange(BIT + 1):
+            if i % BIT == 1:
+                return i
+            i += 1
+    raise ValueError
+    
+def to_hex(s):
+    return s.encode("hex")
 
+
+def to_str(s):
+    return s.decode("hex")
+
+    
 def bitgenerator(message):
     for k in (message):
         p = ord(k)
