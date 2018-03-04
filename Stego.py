@@ -91,6 +91,11 @@ def to_str(s):
     return s.decode("hex")
 
     
+ def encode(cls, input_img_path, output_img_path, filedata,ext):
+        normalize(input_img_path, output_img_path,ext)
+        text_hide(output_img_path, filedata, ext)
+        assert text_read(output_img_path) == filedata, text_read(output_img_path)
+        
 def bitgenerator(message):
     for k in (message):
         p = ord(k)
