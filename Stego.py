@@ -62,11 +62,6 @@ def _modify(i):
     
 
 def hide_text(path, text):
-    """
-    hide text to image
-    :param path: str
-    :param text: str
-    """
     text = str(text)
 
     # convert text to hex for write
