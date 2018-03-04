@@ -60,6 +60,34 @@ def _modify(i):
             i += 1
     raise ValueError
     
+
+def hide_text(path, text):
+    """
+    hide text to image
+    :param path: str
+    :param text: str
+    """
+    text = str(text)
+
+    # convert text to hex for write
+    write_param = []
+    _base = 0
+    for _ in to_hex(text):
+        write_param.append(int(_, 16) + _base)
+        _base += 16
+
+    # hide hex-text to image
+    img = Image.open(path)
+    count = 0
+    for y in range(img.size[1]):
+        for x in range(img.size[0]):
+            if count in write_param:
+                r, g, b = img.getpixel((x, y))
+                r, g, b = pixel_modification(r, g, b)
+                img.putpixel((x, y), (r, g, b))
+            count += 1
+
+    
 def to_hex(s):
     return s.encode("hex")
 
